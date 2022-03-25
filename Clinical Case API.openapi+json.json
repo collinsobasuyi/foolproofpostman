@@ -1,0 +1,3255 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Clinical Case API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://apim-internal-service-staging-uks.azure-api.net/clinicalcases"
+        }
+    ],
+    "paths": {
+        "/api/v1/casenotes/case/{caseReference}": {
+            "post": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "Do a CreateCaseNote, asynchronously.",
+                "description": "Do a CreateCaseNote, asynchronously.",
+                "operationId": "post-api-v1-casenotes-case-casereference",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest"
+                            },
+                            "example": {
+                                "caseReference": "string",
+                                "noteTypeId": 0,
+                                "noteCategories": [
+                                    0
+                                ],
+                                "content": "string",
+                                "changeTaskStatuses": [
+                                    {
+                                        "closed": true,
+                                        "taskReference": "string"
+                                    }
+                                ],
+                                "outcomes": [
+                                    {
+                                        "processReference": "string",
+                                        "data": {
+                                            "valueKind": 0
+                                        },
+                                        "outcomeTypeId": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteResponse"
+                                },
+                                "example": {
+                                    "caseNoteReference": "string",
+                                    "content": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "Get Case Notes, asynchronously.",
+                "description": "Get Case Notes, asynchronously.",
+                "operationId": "get-api-v1-casenotes-case-casereference",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "Gets the case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "readOnly": true
+                        }
+                    },
+                    {
+                        "name": "IsFlagged",
+                        "in": "query",
+                        "description": "Gets or sets a value indicating whether this instance is flagged.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "NoteCategoryIds",
+                        "in": "query",
+                        "description": "Gets or sets the note category ids.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "title": "NoteCategoryId",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "PageNumber",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 100,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "PageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 25,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseNotesResponse"
+                                },
+                                "example": {
+                                    "totalFlagged": 0,
+                                    "pagedResults": [
+                                        {
+                                            "authorName": "string",
+                                            "caseNoteReference": "string",
+                                            "caseReference": "string",
+                                            "content": "string",
+                                            "createdOn": "string",
+                                            "isFlagged": true,
+                                            "modifiedOn": "string",
+                                            "noteCategories": [
+                                                0
+                                            ],
+                                            "noteTypeId": 0,
+                                            "outcomes": [
+                                                {
+                                                    "data": {
+                                                        "valueKind": 0
+                                                    },
+                                                    "outcomeTypeId": 0,
+                                                    "processReference": "string"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "totalCount": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/casenotes/{caseNoteReference}/case/{caseReference}": {
+            "put": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "Edit Case Note, asynchronously.",
+                "description": "Edit Case Note, asynchronously.",
+                "operationId": "put-api-v1-casenotes-casenotereference-case-casereference",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "caseNoteReference",
+                        "in": "path",
+                        "description": "The case note reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.EditCaseNoteRequest"
+                            },
+                            "example": {
+                                "caseReference": "string",
+                                "caseNoteReference": "string",
+                                "content": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/casenotes/{caseNoteReference}/case/{caseReference}/flag": {
+            "post": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "Flag as an asynchronous operation.",
+                "description": "Flag as an asynchronous operation.",
+                "operationId": "post-api-v1-casenotes-casenotereference-case-casereference-flag",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "caseNoteReference",
+                        "in": "path",
+                        "description": "The case note reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.FlagRequest"
+                            },
+                            "example": {
+                                "isFlagged": true,
+                                "caseReference": "string",
+                                "caseNoteReference": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/casenotes/notecategories": {
+            "get": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "Get Note Categories, asynchronously.",
+                "description": "Get Note Categories, asynchronously.",
+                "operationId": "get-api-v1-casenotes-notecategories",
+                "parameters": [
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetNoteCategoriesResponse_NoteCategoryItem"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 0,
+                                        "localisationKey": "string",
+                                        "processTypeId": 0,
+                                        "processTypeLocalisationKey": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/casenotes/outcometypes": {
+            "get": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "Get Outcome Types, asynchronously.",
+                "description": "Get Outcome Types, asynchronously.",
+                "operationId": "get-api-v1-casenotes-outcometypes",
+                "parameters": [
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetOutcomeTypesResponse_OutcomeType"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 0,
+                                        "noteTypeId": 0,
+                                        "noteTypeName": "string",
+                                        "processTypeId": 0,
+                                        "processTypeName": "string",
+                                        "type": "string",
+                                        "typeNamespace": "string",
+                                        "version": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/casenotes/serviceuser/{serviceUserReference}": {
+            "get": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "Get service user notes as an asynchronous operation.",
+                "description": "Get service user notes as an asynchronous operation.",
+                "operationId": "get-api-v1-casenotes-serviceuser-serviceuserreference",
+                "parameters": [
+                    {
+                        "name": "serviceUserReference",
+                        "in": "path",
+                        "description": "Gets or sets the route parameter.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "IsFlagged",
+                        "in": "query",
+                        "description": "Gets or sets a value indicating whether this instance is flagged.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "NoteCategoryIds",
+                        "in": "query",
+                        "description": "Gets or sets the note category ids.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "title": "NoteCategoryId",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "PageNumber",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 100,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "PageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 25,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserNotesResponse"
+                                },
+                                "example": {
+                                    "pagedResults": [
+                                        {
+                                            "caseNoteReference": "string",
+                                            "authorName": "string",
+                                            "content": "string",
+                                            "caseReference": "string",
+                                            "isFlagged": true,
+                                            "noteTypeId": 0,
+                                            "noteCategories": [
+                                                0
+                                            ],
+                                            "outcomes": [
+                                                {
+                                                    "processReference": "string",
+                                                    "data": {
+                                                        "valueKind": 0
+                                                    },
+                                                    "outcomeTypeId": 0
+                                                }
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ],
+                                    "totalCount": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/casenotes/notetypes": {
+            "get": {
+                "tags": [
+                    "CaseNotes"
+                ],
+                "summary": "List note types as an asynchronous operation.",
+                "description": "List note types as an asynchronous operation.",
+                "operationId": "get-api-v1-casenotes-notetypes",
+                "parameters": [
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.ListNoteTypesResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "noteTypes": [
+                                            {
+                                                "id": 0,
+                                                "localisationKey": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/{caseReference}": {
+            "get": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Get a Case, asynchronously.",
+                "description": "Get a Case, asynchronously.",
+                "operationId": "get-api-v1-cases-casereference",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse"
+                                },
+                                "example": {
+                                    "caseReference": "string",
+                                    "createdOn": "string",
+                                    "processes": [
+                                        {
+                                            "processReference": "string",
+                                            "processType": "string",
+                                            "resources": [
+                                                {
+                                                    "rel": "string",
+                                                    "type": "string"
+                                                }
+                                            ],
+                                            "status": "string",
+                                            "summary": {
+                                                "valueKind": 0
+                                            },
+                                            "tasks": [
+                                                {
+                                                    "actions": [
+                                                        {
+                                                            "localisationKey": "string"
+                                                        }
+                                                    ],
+                                                    "dueDate": "string",
+                                                    "status": "string",
+                                                    "taskReference": "string",
+                                                    "taskTypeLocalisationKey": "string"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "serviceProviderReference": "string",
+                                    "serviceUserReference": "string",
+                                    "status": "string",
+                                    "isFollowingCase": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/{caseReference}/tasks": {
+            "get": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Gets the case tasks, asynchronously.",
+                "description": "Gets the case tasks, asynchronously.",
+                "operationId": "get-api-v1-cases-casereference-tasks",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseTasksResponse_TaskItem"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "taskReference": "string",
+                                        "processType": "string",
+                                        "processTypeId": 0,
+                                        "dueDate": "string",
+                                        "status": "string",
+                                        "actions": [
+                                            {
+                                                "localisationKey": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/{caseReference}/processes": {
+            "get": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Get the case processes, asynchronously.",
+                "description": "Get the case processes, asynchronously.",
+                "operationId": "get-api-v1-cases-casereference-processes",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "processReference": "string",
+                                        "processType": "string",
+                                        "resources": [
+                                            {
+                                                "type": "string",
+                                                "rel": "string"
+                                            }
+                                        ],
+                                        "tasks": [
+                                            {
+                                                "taskReference": "string",
+                                                "taskTypeLocalisationKey": "string",
+                                                "dueDate": "string",
+                                                "status": "string",
+                                                "actions": [
+                                                    {
+                                                        "localisationKey": "string"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cases": {
+            "get": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Get Cases, asynchronously.",
+                "description": "Get Cases, asynchronously.",
+                "operationId": "get-api-v1-cases",
+                "parameters": [
+                    {
+                        "name": "Filters",
+                        "in": "query",
+                        "description": "Gets the filters.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/System.Collections.Generic.KeyValuePair"
+                            }
+                        }
+                    },
+                    {
+                        "name": "FirstName",
+                        "in": "query",
+                        "description": "Gets the first name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "LastName",
+                        "in": "query",
+                        "description": "Gets the last name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "DateOfBirth",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Gets the date of birth.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "ContactNumber",
+                        "in": "query",
+                        "description": "Gets the contact number.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "PostCode",
+                        "in": "query",
+                        "description": "Gets the post code.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "EmailAddress",
+                        "in": "query",
+                        "description": "Gets the email address.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "PageNumber",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 100,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "PageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 25,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse"
+                                },
+                                "example": {
+                                    "totalClosed": 0,
+                                    "totalFollowed": 0,
+                                    "totalOpen": 0,
+                                    "pagedResults": [
+                                        {
+                                            "caseDetail": {
+                                                "caseReference": "string",
+                                                "caseStatus": "string",
+                                                "createdOn": "string",
+                                                "modifiedOn": "string",
+                                                "serviceProviderReference": "string",
+                                                "serviceUserReference": "string"
+                                            },
+                                            "tasks": [
+                                                {
+                                                    "dueDate": "string",
+                                                    "processTypeLocalisationKey": "string",
+                                                    "status": "string",
+                                                    "summary": {
+                                                        "valueKind": 0
+                                                    },
+                                                    "taskTypeLocalisationKey": "string"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "totalCount": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/{caseReference}/follow": {
+            "put": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Follow a case, asynchronously.",
+                "description": "Follow a case, asynchronously.",
+                "operationId": "put-api-v1-cases-casereference-follow",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/{caseReference}/unfollow": {
+            "put": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Unfollow a case, asynchronously.",
+                "description": "Unfollow a case, asynchronously.",
+                "operationId": "put-api-v1-cases-casereference-unfollow",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "The case reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/{caseReference}/process/{processReference}": {
+            "put": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Close a Process, asynchronously.",
+                "description": "Close a Process, asynchronously.",
+                "operationId": "put-api-v1-cases-casereference-process-processreference",
+                "parameters": [
+                    {
+                        "name": "caseReference",
+                        "in": "path",
+                        "description": "Gets the route parameter.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "readOnly": true
+                        }
+                    },
+                    {
+                        "name": "processReference",
+                        "in": "path",
+                        "description": "Gets the query item.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "readOnly": true
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/searchcount": {
+            "get": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Get Search Counts, asynchronously.",
+                "description": "Get Search Counts, asynchronously.",
+                "operationId": "get-api-v1-cases-searchcount",
+                "parameters": [
+                    {
+                        "name": "ServiceUserReference",
+                        "in": "query",
+                        "description": "Gets or sets the service user reference.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "CaseReference",
+                        "in": "query",
+                        "description": "Gets or sets the case reference.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "FirstName",
+                        "in": "query",
+                        "description": "Gets the first name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "LastName",
+                        "in": "query",
+                        "description": "Gets the last name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "DateOfBirth",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Gets the date of birth.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "ContactNumber",
+                        "in": "query",
+                        "description": "Gets the contact number.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "PostCode",
+                        "in": "query",
+                        "description": "Gets the post code.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "EmailAddress",
+                        "in": "query",
+                        "description": "Gets the email address.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetSearchCountsResponse"
+                                },
+                                "example": {
+                                    "caseReference": "string",
+                                    "serviceUserReference": "string",
+                                    "totalCases": 0,
+                                    "totalServiceUsers": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/filters": {
+            "get": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Get Case Filters, asynchronously.",
+                "description": "Get Case Filters, asynchronously.",
+                "operationId": "get-api-v1-cases-filters",
+                "parameters": [
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseFiltersResponse_FilterItem"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cases/casecount": {
+            "get": {
+                "tags": [
+                    "Cases"
+                ],
+                "summary": "Get case counts as an asynchronous operation.",
+                "description": "Get case counts as an asynchronous operation.",
+                "operationId": "get-api-v1-cases-casecount",
+                "parameters": [
+                    {
+                        "name": "ServiceUserReferences",
+                        "in": "query",
+                        "description": "Gets the service user references.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseCountsResponse_ServiceUser"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "serviceUserReference": "string",
+                                        "openCount": 0,
+                                        "closedCount": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/serviceusers": {
+            "get": {
+                "tags": [
+                    "ServiceUsers"
+                ],
+                "summary": "Get service users as an asynchronous operation.",
+                "description": "Get service users as an asynchronous operation.",
+                "operationId": "get-api-v1-serviceusers",
+                "parameters": [
+                    {
+                        "name": "Filters",
+                        "in": "query",
+                        "description": "Gets the filter.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/System.Collections.Generic.KeyValuePair"
+                            }
+                        }
+                    },
+                    {
+                        "name": "FirstName",
+                        "in": "query",
+                        "description": "Gets the first name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "LastName",
+                        "in": "query",
+                        "description": "Gets the last name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "DateOfBirth",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Gets the date of birth.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "ContactNumber",
+                        "in": "query",
+                        "description": "Gets the contact number.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "PostCode",
+                        "in": "query",
+                        "description": "Gets the post code.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "EmailAddress",
+                        "in": "query",
+                        "description": "Gets the email address.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "PageNumber",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 100,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "PageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 25,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUsersResponse"
+                                },
+                                "example": {
+                                    "pagedResults": [
+                                        {
+                                            "serviceUserReference": "string"
+                                        }
+                                    ],
+                                    "totalCount": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/serviceusers/{serviceUserReference}/casehistory": {
+            "get": {
+                "tags": [
+                    "ServiceUsers"
+                ],
+                "summary": "Do a GetServiceUserCaseHistory, asynchronously.",
+                "description": "Do a GetServiceUserCaseHistory, asynchronously.",
+                "operationId": "get-api-v1-serviceusers-serviceuserreference-casehistory",
+                "parameters": [
+                    {
+                        "name": "serviceUserReference",
+                        "in": "path",
+                        "description": "Gets or sets the service user reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "serviceProviders",
+                        "in": "query",
+                        "description": "Gets or sets the service providers.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserCaseHistoryResponse"
+                                },
+                                "example": {
+                                    "caseHistories": [
+                                        {
+                                            "caseReference": "string",
+                                            "serviceProviderReference": "string",
+                                            "status": "string",
+                                            "createdOn": "string",
+                                            "tasks": [
+                                                {
+                                                    "dueDate": "string",
+                                                    "status": "string",
+                                                    "taskTypeLocalisationKey": "string",
+                                                    "processTypeLocalisationKey": "string",
+                                                    "summary": {
+                                                        "valueKind": 0
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/serviceusers/filters": {
+            "get": {
+                "tags": [
+                    "ServiceUsers"
+                ],
+                "summary": "Do a GetServiceUserFilters, asynchronously.",
+                "description": "Do a GetServiceUserFilters, asynchronously.",
+                "operationId": "get-api-v1-serviceusers-filters",
+                "parameters": [
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserFiltersResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tasks/{processReference}": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Create a Task asynchronously.",
+                "description": "Create a Task asynchronously.",
+                "operationId": "post-api-v1-tasks-processreference",
+                "parameters": [
+                    {
+                        "name": "processReference",
+                        "in": "path",
+                        "description": "The process reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.CreateTaskRequest"
+                            },
+                            "example": {
+                                "processReference": "string",
+                                "dueDate": "string",
+                                "taskTypeId": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.CreateTaskResponse"
+                                },
+                                "example": {
+                                    "processReference": "string",
+                                    "taskReference": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tasks/{taskReference}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Gets this instance.",
+                "description": "Gets this instance.",
+                "operationId": "get-api-v1-tasks-taskreference",
+                "parameters": [
+                    {
+                        "name": "taskReference",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "501": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/tasks/{taskReference}/duedate": {
+            "put": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "SetDueDate, asynchronously.",
+                "description": "SetDueDate, asynchronously.",
+                "operationId": "put-api-v1-tasks-taskreference-duedate",
+                "parameters": [
+                    {
+                        "name": "taskReference",
+                        "in": "path",
+                        "description": "The task reference.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.SetDueDateRequest"
+                            },
+                            "example": {
+                                "dueDate": "string",
+                                "taskReference": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/tasktypes/{processTypeLocalisationKey}": {
+            "get": {
+                "tags": [
+                    "TaskTypes"
+                ],
+                "summary": "Gets the task types for a specified ProcessType.",
+                "description": "Gets the task types for a specified ProcessType.",
+                "operationId": "get-api-v1-tasktypes-processtypelocalisationkey",
+                "parameters": [
+                    {
+                        "name": "processTypeLocalisationKey",
+                        "in": "path",
+                        "description": "The process type localisation key.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetTaskTypesResponse_TaskType"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 0,
+                                        "localisationKey": "string",
+                                        "processTypeLocalisationKey": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/worklists/filters": {
+            "get": {
+                "tags": [
+                    "Worklists"
+                ],
+                "summary": "Gets the worklist filters.",
+                "description": "Gets the worklist filters.",
+                "operationId": "get-api-v1-worklists-filters",
+                "parameters": [
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetWorklistFiltersResponse_SearchFilter"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/worklists": {
+            "get": {
+                "tags": [
+                    "Worklists"
+                ],
+                "summary": "Get a GetCaseWorklist, asynchronously.",
+                "description": "Get a GetCaseWorklist, asynchronously.",
+                "operationId": "get-api-v1-worklists",
+                "parameters": [
+                    {
+                        "name": "Filters",
+                        "in": "query",
+                        "description": "Gets or sets the filters.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "PageNumber",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 100,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "PageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "maximum": 25,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "preventx-request-id",
+                        "in": "header",
+                        "description": "PreventX request id header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "default": {
+                                "value": null
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse"
+                                },
+                                "example": {
+                                    "totalDue": 0,
+                                    "totalOverdue": 0,
+                                    "pagedResults": [
+                                        {
+                                            "caseDetail": {
+                                                "caseReference": "string",
+                                                "serviceUserReference": "string"
+                                            },
+                                            "tasks": [
+                                                {
+                                                    "dueDate": "string",
+                                                    "processTypeLocalisationKey": "string",
+                                                    "status": "string",
+                                                    "summary": {
+                                                        "valueKind": 0
+                                                    },
+                                                    "taskTypeLocalisationKey": "string"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "totalCount": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest": {
+                "type": "object",
+                "properties": {
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the case reference.",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "noteTypeId": {
+                        "title": "NoteTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the type of the note. This aligns with Note Type Id.",
+                        "nullable": true
+                    },
+                    "noteCategories": {
+                        "type": "array",
+                        "items": {
+                            "title": "NoteCategoryId",
+                            "type": "integer"
+                        },
+                        "description": "Gets or sets the note category Ids. This aligns with ProcessTypes.",
+                        "nullable": true
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "Gets or sets the comment.",
+                        "nullable": true
+                    },
+                    "changeTaskStatuses": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest_ChangeTaskStatusRequest"
+                        },
+                        "description": "Gets or sets the tasks to close.",
+                        "nullable": true
+                    },
+                    "outcomes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest_OutcomeRequest"
+                        },
+                        "description": "Gets or sets the outcomes.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "CreateCaseNoteRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest_ChangeTaskStatusRequest": {
+                "type": "object",
+                "properties": {
+                    "closed": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether this Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest.ChangeTaskStatusRequest is closed."
+                    },
+                    "taskReference": {
+                        "type": "string",
+                        "description": "Gets or sets the task reference.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ChangeTaskStatus."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest_OutcomeRequest": {
+                "type": "object",
+                "properties": {
+                    "processReference": {
+                        "type": "string",
+                        "description": "Gets or sets the Process identifier.",
+                        "nullable": true
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+                    },
+                    "outcomeTypeId": {
+                        "title": "OutcomeTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the type.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Outcome."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteResponse": {
+                "type": "object",
+                "properties": {
+                    "caseNoteReference": {
+                        "type": "string",
+                        "description": "Gets or sets the case note identifier.",
+                        "nullable": true
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "Gets or sets the content.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Commands.CreateCaseNoteRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.CreateTaskRequest": {
+                "required": [
+                    "dueDate",
+                    "taskTypeId"
+                ],
+                "type": "object",
+                "properties": {
+                    "processReference": {
+                        "type": "string",
+                        "description": "Gets or sets the process reference.",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets or sets the due date.",
+                        "format": "date-time"
+                    },
+                    "taskTypeId": {
+                        "title": "TaskTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the task type identifier."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "CreateTaskRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.CreateTaskResponse": {
+                "type": "object",
+                "properties": {
+                    "processReference": {
+                        "type": "string",
+                        "description": "Gets or sets the process reference.",
+                        "nullable": true
+                    },
+                    "taskReference": {
+                        "type": "string",
+                        "description": "Gets or sets the task reference.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Commands.CreateTaskRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.EditCaseNoteRequest": {
+                "type": "object",
+                "properties": {
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets or sets the case reference.",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "caseNoteReference": {
+                        "type": "string",
+                        "description": "Gets or sets the case note reference.",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "Gets the content.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "EditCaseNoteRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.FlagRequest": {
+                "required": [
+                    "isFlagged"
+                ],
+                "type": "object",
+                "properties": {
+                    "isFlagged": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether this instance is flagged."
+                    },
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the case reference.",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "caseNoteReference": {
+                        "type": "string",
+                        "description": "Gets the case note reference.",
+                        "nullable": true,
+                        "readOnly": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "FlagRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Commands.SetDueDateRequest": {
+                "required": [
+                    "dueDate"
+                ],
+                "type": "object",
+                "properties": {
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets the due date.",
+                        "format": "date-time"
+                    },
+                    "taskReference": {
+                        "type": "string",
+                        "description": "Gets or sets the task reference.",
+                        "nullable": true,
+                        "readOnly": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "SetDueDateRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseCountsResponse_ServiceUser": {
+                "type": "object",
+                "properties": {
+                    "serviceUserReference": {
+                        "type": "string",
+                        "description": "Gets the service user reference.",
+                        "nullable": true
+                    },
+                    "openCount": {
+                        "type": "integer",
+                        "description": "Gets the open count.",
+                        "format": "int32"
+                    },
+                    "closedCount": {
+                        "type": "integer",
+                        "description": "Gets the closed count.",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ServiceUser."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseFiltersResponse_FilterItem": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Gets or sets the Code.",
+                        "nullable": true
+                    },
+                    "children": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseFiltersResponse_FilterItem"
+                        },
+                        "description": "Gets or sets the ParentCode.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Class FilterItem."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseNotesResponse": {
+                "type": "object",
+                "properties": {
+                    "totalFlagged": {
+                        "type": "integer",
+                        "description": "Gets the total flagged.",
+                        "format": "int32"
+                    },
+                    "pagedResults": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseNotesResponse_ResultItem"
+                        },
+                        "nullable": true
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.GetCaseNotesRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseNotesResponse_ResultItem": {
+                "type": "object",
+                "properties": {
+                    "authorName": {
+                        "type": "string",
+                        "description": "Gets the name of the author.",
+                        "nullable": true
+                    },
+                    "caseNoteReference": {
+                        "type": "string",
+                        "description": "Gets the case note reference.",
+                        "nullable": true
+                    },
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the case reference.",
+                        "nullable": true
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "Gets the content.",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Gets the created on.",
+                        "format": "date-time"
+                    },
+                    "isFlagged": {
+                        "type": "boolean",
+                        "description": "Gets a value indicating whether this instance is flagged."
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Gets the modified on.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "noteCategories": {
+                        "type": "array",
+                        "items": {
+                            "title": "NoteCategoryId",
+                            "type": "integer"
+                        },
+                        "description": "Gets the note categories.",
+                        "nullable": true
+                    },
+                    "noteTypeId": {
+                        "title": "NoteTypeId",
+                        "type": "integer",
+                        "description": "Gets the note type identifier.",
+                        "nullable": true
+                    },
+                    "outcomes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseNotesResponse_ResultItem_OutcomeItem"
+                        },
+                        "description": "Gets the outcomes.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Result item."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseNotesResponse_ResultItem_OutcomeItem": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+                    },
+                    "outcomeTypeId": {
+                        "title": "OutcomeTypeId",
+                        "type": "integer",
+                        "description": "Gets the type.",
+                        "nullable": true
+                    },
+                    "processReference": {
+                        "type": "string",
+                        "description": "Gets the Process identifier.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Outcome item."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem": {
+                "type": "object",
+                "properties": {
+                    "processReference": {
+                        "type": "string",
+                        "description": "Gets the process reference.",
+                        "nullable": true
+                    },
+                    "processType": {
+                        "type": "string",
+                        "description": "Gets the type of the process.",
+                        "nullable": true
+                    },
+                    "resources": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem_ProcessResource"
+                        },
+                        "description": "Gets the resources.",
+                        "nullable": true
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem_ProcessTask"
+                        },
+                        "description": "Gets the tasks.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Process Item."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem_ProcessResource": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Gets the type.",
+                        "nullable": true
+                    },
+                    "rel": {
+                        "type": "string",
+                        "description": "Gets the relative.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ProcessResource."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem_ProcessTask": {
+                "type": "object",
+                "properties": {
+                    "taskReference": {
+                        "type": "string",
+                        "description": "Gets the case task reference.",
+                        "nullable": true
+                    },
+                    "taskTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the type of the task.",
+                        "nullable": true
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets the due date.",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "actions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem_ProcessTask_ProcessTaskAction"
+                        },
+                        "description": "Gets the actions.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ProcessTask."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseProcessesResponse_ProcessItem_ProcessTask_ProcessTaskAction": {
+                "type": "object",
+                "properties": {
+                    "localisationKey": {
+                        "type": "string",
+                        "description": "Gets the action code.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Process Task Action."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse": {
+                "type": "object",
+                "properties": {
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the case identifier.",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Gets the case created date.",
+                        "format": "date-time"
+                    },
+                    "processes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess"
+                        },
+                        "description": "Gets the processes.",
+                        "nullable": true
+                    },
+                    "serviceProviderReference": {
+                        "type": "string",
+                        "description": "Gets the service provider reference.",
+                        "nullable": true
+                    },
+                    "serviceUserReference": {
+                        "type": "string",
+                        "description": "Gets the service user reference.",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "isFollowingCase": {
+                        "type": "boolean",
+                        "description": "Gets a value indicating whether logged in user is following this case."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a GetCaseRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess": {
+                "type": "object",
+                "properties": {
+                    "processReference": {
+                        "type": "string",
+                        "description": "Gets the process reference.",
+                        "nullable": true
+                    },
+                    "processType": {
+                        "type": "string",
+                        "description": "Gets the type of the process.",
+                        "nullable": true
+                    },
+                    "resources": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess_ProcessResource"
+                        },
+                        "description": "Gets the resources.",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "summary": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess_ProcessTask"
+                        },
+                        "description": "Gets the tasks.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Processes in a Case."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess_ProcessResource": {
+                "type": "object",
+                "properties": {
+                    "rel": {
+                        "type": "string",
+                        "description": "Gets the relative.",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Gets the type.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ProcessResource."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess_ProcessTask": {
+                "type": "object",
+                "properties": {
+                    "actions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess_ProcessTask_ProcessTaskAction"
+                        },
+                        "description": "Gets the actions.",
+                        "nullable": true
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets the due date.",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "taskReference": {
+                        "type": "string",
+                        "description": "Gets the case task reference.",
+                        "nullable": true
+                    },
+                    "taskTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the task type localisation key.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ProcessTask."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseResponse_CaseProcess_ProcessTask_ProcessTaskAction": {
+                "type": "object",
+                "properties": {
+                    "localisationKey": {
+                        "type": "string",
+                        "description": "Gets the action code.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Process Task Action."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse": {
+                "type": "object",
+                "properties": {
+                    "totalClosed": {
+                        "type": "integer",
+                        "description": "Gets the total overdue.",
+                        "format": "int32"
+                    },
+                    "totalFollowed": {
+                        "type": "integer",
+                        "description": "Gets the total followed.",
+                        "format": "int32"
+                    },
+                    "totalOpen": {
+                        "type": "integer",
+                        "description": "Gets the total due.",
+                        "format": "int32"
+                    },
+                    "pagedResults": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse_CaseItem"
+                        },
+                        "nullable": true
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.GetCasesRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse_CaseItem": {
+                "type": "object",
+                "properties": {
+                    "caseDetail": {
+                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse_CaseItem_CaseDetailItem"
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse_CaseItem_CaseTaskItem"
+                        },
+                        "description": "Gets the tasks.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Class CaseItem."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse_CaseItem_CaseDetailItem": {
+                "type": "object",
+                "properties": {
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the case reference.",
+                        "nullable": true
+                    },
+                    "caseStatus": {
+                        "type": "string",
+                        "description": "Gets the case status.",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Gets the created On.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Gets the modified on.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "serviceProviderReference": {
+                        "type": "string",
+                        "description": "Gets the service provider reference.",
+                        "nullable": true
+                    },
+                    "serviceUserReference": {
+                        "type": "string",
+                        "description": "Gets the service user reference.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Caselist case detail."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCasesResponse_CaseItem_CaseTaskItem": {
+                "type": "object",
+                "properties": {
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets the due date.",
+                        "format": "date-time"
+                    },
+                    "processTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the type of the process.",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "summary": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+                    },
+                    "taskTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the task type.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The case task Item."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseTasksResponse_TaskItem": {
+                "type": "object",
+                "properties": {
+                    "taskReference": {
+                        "type": "string",
+                        "description": "Gets the task reference.",
+                        "nullable": true
+                    },
+                    "processType": {
+                        "type": "string",
+                        "description": "Gets the process type.",
+                        "nullable": true
+                    },
+                    "processTypeId": {
+                        "title": "ProcessTypeId",
+                        "type": "integer",
+                        "description": "Gets the process type identifier.",
+                        "nullable": true
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets the due date.",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "actions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseTasksResponse_TaskItem_ActionItem"
+                        },
+                        "description": "Gets the actions.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Class TaskItem."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseTasksResponse_TaskItem_ActionItem": {
+                "type": "object",
+                "properties": {
+                    "localisationKey": {
+                        "type": "string",
+                        "description": "Gets the action code.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Process Task Action."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse": {
+                "type": "object",
+                "properties": {
+                    "totalDue": {
+                        "type": "integer",
+                        "description": "Gets the total due.",
+                        "format": "int32"
+                    },
+                    "totalOverdue": {
+                        "type": "integer",
+                        "description": "Gets the total overdue.",
+                        "format": "int32"
+                    },
+                    "pagedResults": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse_CaseItem"
+                        },
+                        "nullable": true
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse_CaseItem": {
+                "type": "object",
+                "properties": {
+                    "caseDetail": {
+                        "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse_CaseItem_CaseDetails"
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse_CaseItem_TaskDetails"
+                        },
+                        "description": "Gets the tasks.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Get Case Worklist Response Item."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse_CaseItem_CaseDetails": {
+                "type": "object",
+                "properties": {
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the case reference.",
+                        "nullable": true
+                    },
+                    "serviceUserReference": {
+                        "type": "string",
+                        "description": "Gets the service user reference.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Worklist Case Detail."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetCaseWorklistResponse_CaseItem_TaskDetails": {
+                "type": "object",
+                "properties": {
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets the due date.",
+                        "format": "date-time"
+                    },
+                    "processTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the process type.",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "summary": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+                    },
+                    "taskTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the type of the task.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Worklist Task."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetNoteCategoriesResponse_NoteCategoryItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "NoteCategoryId",
+                        "type": "integer",
+                        "description": "Gets the identifier.",
+                        "nullable": true
+                    },
+                    "localisationKey": {
+                        "type": "string",
+                        "description": "Gets the Localisation Key.",
+                        "nullable": true
+                    },
+                    "processTypeId": {
+                        "title": "ProcessTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the process type identifier.",
+                        "nullable": true
+                    },
+                    "processTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets or sets the process type localisation key.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Note Category Item."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetOutcomeTypesResponse_OutcomeType": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "OutcomeTypeId",
+                        "type": "integer",
+                        "description": "Gets the outcome identifier.",
+                        "nullable": true
+                    },
+                    "noteTypeId": {
+                        "title": "NoteTypeId",
+                        "type": "integer",
+                        "description": "Gets the note type identifier.",
+                        "nullable": true
+                    },
+                    "noteTypeName": {
+                        "type": "string",
+                        "description": "Gets the name of the note type.",
+                        "nullable": true
+                    },
+                    "processTypeId": {
+                        "title": "ProcessTypeId",
+                        "type": "integer",
+                        "description": "Gets the process type identifier.",
+                        "nullable": true
+                    },
+                    "processTypeName": {
+                        "type": "string",
+                        "description": "Gets the name of the process type.",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Gets the type.",
+                        "nullable": true
+                    },
+                    "typeNamespace": {
+                        "type": "string",
+                        "description": "Gets the type.",
+                        "nullable": true
+                    },
+                    "version": {
+                        "type": "integer",
+                        "description": "Gets the version.",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "OutcomeType."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetSearchCountsResponse": {
+                "type": "object",
+                "properties": {
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the first case identifier.",
+                        "nullable": true
+                    },
+                    "serviceUserReference": {
+                        "type": "string",
+                        "description": "Gets the service user identifier.",
+                        "nullable": true
+                    },
+                    "totalCases": {
+                        "type": "integer",
+                        "description": "Gets the total cases.",
+                        "format": "int32"
+                    },
+                    "totalServiceUsers": {
+                        "type": "integer",
+                        "description": "Gets the total service users.",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.GetSearchCountsRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserCaseHistoryResponse": {
+                "type": "object",
+                "properties": {
+                    "caseHistories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserCaseHistoryResponse_CaseHistory"
+                        },
+                        "description": "Gets the case histories.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserCaseHistoryRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserCaseHistoryResponse_CaseHistory": {
+                "type": "object",
+                "properties": {
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets the case identifier.",
+                        "nullable": true
+                    },
+                    "serviceProviderReference": {
+                        "type": "string",
+                        "description": "Gets the service provider reference.",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Gets the date of creation.",
+                        "format": "date-time"
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserCaseHistoryResponse_CaseHistory_ProcessTask"
+                        },
+                        "description": "Gets the tasks.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Case response model."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserCaseHistoryResponse_CaseHistory_ProcessTask": {
+                "type": "object",
+                "properties": {
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Gets the due date.",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Gets the status.",
+                        "nullable": true
+                    },
+                    "taskTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the task type localisation key.",
+                        "nullable": true
+                    },
+                    "processTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets the process type localisation key.",
+                        "nullable": true
+                    },
+                    "summary": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ProcessTask."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserFiltersResponse": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Gets the Code.",
+                        "nullable": true
+                    },
+                    "isExclusive": {
+                        "type": "boolean",
+                        "description": "Gets a value indicating whether this instance is exclusive."
+                    },
+                    "children": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserFiltersResponse"
+                        },
+                        "description": "Gets the ParentCode.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Application.Queries.GetServiceUserFilters.GetServiceUserFiltersQuery."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserNotesResponse": {
+                "type": "object",
+                "properties": {
+                    "pagedResults": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserNotesResponse_CaseNote"
+                        },
+                        "nullable": true
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserNotesRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserNotesResponse_CaseNote": {
+                "type": "object",
+                "properties": {
+                    "caseNoteReference": {
+                        "type": "string",
+                        "description": "Gets or sets the case note identifier.",
+                        "nullable": true
+                    },
+                    "authorName": {
+                        "type": "string",
+                        "description": "Gets or sets the name of the author.",
+                        "nullable": true
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "Gets or sets the content.",
+                        "nullable": true
+                    },
+                    "caseReference": {
+                        "type": "string",
+                        "description": "Gets or sets the case identifier.",
+                        "nullable": true
+                    },
+                    "isFlagged": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether this instance is flagged."
+                    },
+                    "noteTypeId": {
+                        "title": "NoteTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the type of the note.",
+                        "nullable": true
+                    },
+                    "noteCategories": {
+                        "type": "array",
+                        "items": {
+                            "title": "NoteCategoryId",
+                            "type": "integer"
+                        },
+                        "description": "Gets or sets the note categories.",
+                        "nullable": true
+                    },
+                    "outcomes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserNotesResponse_Outcome"
+                        },
+                        "description": "Gets or sets the outcomes.",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Gets or sets the created on.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Gets or sets the modified on.",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The CaseNote."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUserNotesResponse_Outcome": {
+                "type": "object",
+                "properties": {
+                    "processReference": {
+                        "type": "string",
+                        "description": "Gets or sets the process reference.",
+                        "nullable": true
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+                    },
+                    "outcomeTypeId": {
+                        "title": "OutcomeTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the outcome type identifier.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The Outcome."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUsersResponse": {
+                "type": "object",
+                "properties": {
+                    "pagedResults": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetServiceUsersResponse_ServiceUser"
+                        },
+                        "nullable": true
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.GetServiceUsersRequest."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetServiceUsersResponse_ServiceUser": {
+                "type": "object",
+                "properties": {
+                    "serviceUserReference": {
+                        "type": "string",
+                        "description": "Gets the external service principle identifier.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The ServiceUser."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetTaskTypesResponse_TaskType": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "TaskTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the identifier.",
+                        "nullable": true
+                    },
+                    "localisationKey": {
+                        "type": "string",
+                        "description": "Gets or sets the Localisation Key.",
+                        "nullable": true
+                    },
+                    "processTypeLocalisationKey": {
+                        "type": "string",
+                        "description": "Gets or sets the process type code.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The TaskType."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.GetWorklistFiltersResponse_SearchFilter": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Gets or sets the Code.",
+                        "nullable": true
+                    },
+                    "children": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.GetWorklistFiltersResponse_SearchFilter"
+                        },
+                        "description": "Gets or sets the ParentCode.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The SearchFilter."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.ListNoteTypesResponse": {
+                "type": "object",
+                "properties": {
+                    "noteTypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Preventx.Services.ClinicalCase.Api.Queries.ListNoteTypesResponse_NoteTypeItem"
+                        },
+                        "description": "Gets or sets the note types.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response from a Preventx.Services.ClinicalCase.Api.Queries.ListNoteTypesResponse."
+            },
+            "Preventx.Services.ClinicalCase.Api.Queries.ListNoteTypesResponse_NoteTypeItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "NoteTypeId",
+                        "type": "integer",
+                        "description": "Gets or sets the identifier.",
+                        "nullable": true
+                    },
+                    "localisationKey": {
+                        "type": "string",
+                        "description": "Gets or sets the Localisation Key.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The NoteType."
+            },
+            "System.Collections.Generic.KeyValuePair": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "System.Text.Json.JsonElement": {
+                "type": "object",
+                "properties": {
+                    "valueKind": {
+                        "$ref": "#/components/schemas/System.Text.Json.JsonValueKind"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "System.Text.Json.JsonValueKind": {
+                "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                ],
+                "type": "integer",
+                "format": "int32"
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "Ocp-Apim-Subscription-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "subscription-key",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
